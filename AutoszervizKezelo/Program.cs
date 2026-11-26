@@ -17,12 +17,10 @@ var leg = munkalapok.MaxBy(m => m.FizetendoOsszeg());
 Console.WriteLine($"Legtöbbet fizető ügyfél: {leg.UgyfelNev}({leg.FizetendoOsszeg()} Ft)");
 Console.WriteLine($"Fizetős munkalapok száma: {munkalapok.Count(m => m.FizetendoOsszeg() > 0)} db");
 Console.WriteLine("\nMOTOR kategóriájú munkalapok:");
-foreach (var sor in munkalapok)
+List<Munkalap> szurt = munkalapok.Where(x => x.Kategoria == "MOTOR").ToList();
+foreach (var munkalap in szurt)
 {
-    if (sor.Kategoria == "MOTOR")
-    {
-        Console.WriteLine($"{sor.UgyfelNev} ({sor.Munkaora} óra)");
-    }
+    Console.WriteLine($"{munkalap.UgyfelNev} ({munkalap.Munkaora} óra)");
 }
 Console.WriteLine("\nDöntések:");
 Console.WriteLine($"Volt 150 000 Ft feletti javítás: {(munkalapok.Any(m => m.FizetendoOsszeg() > 150000) ? "Igen" : "Nem")} ");
